@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Funny Poll</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .poll-container {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      margin: auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding-top: 50px;
+      overflow: hidden;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      position: absolute;
+    }
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+      left: 150px;
+      top: 100px;
+      position: relative;
+    }
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>WOULD YOU LIKE TO VOTE BALEN/ANY OTHER MEMBERS FROM "RSP"?</h1>
+  <div class="poll-container">
+    <button id="yesBtn">Yes ✅</button>
+    <button id="noBtn">No ❌</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const pollContainer = document.querySelector(".poll-container");
+
+    // Initial position
+    noBtn.style.left = "200px";
+    noBtn.style.top = "150px";
+
+    pollContainer.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      // If mouse is close to the No button, move it
+      const distanceX = Math.abs(mouseX - (rect.left + rect.width / 2));
+      const distanceY = Math.abs(mouseY - (rect.top + rect.height / 2));
+
+      if (distanceX < 80 && distanceY < 50) {
+        const containerWidth = pollContainer.offsetWidth - noBtn.offsetWidth;
+        const containerHeight = pollContainer.offsetHeight - noBtn.offsetHeight;
+
+        const randomX = Math.floor(Math.random() * containerWidth);
+        const randomY = Math.floor(Math.random() * containerHeight);
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+      }
+    });
+
+    document.getElementById("yesBtn").addEventListener("click", () => {
+      alert("You voted YES! 🎉");
+    });
+  </script>
+</body>
+</html>
